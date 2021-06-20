@@ -1,7 +1,11 @@
+import { AudioVisualizer } from 'react-audio-visualizers-core';
+
 function App() {
   return (
     <div>
-      APP
+      <AudioVisualizer audio="sdad">
+        <div></div>
+      </AudioVisualizer>
     </div>
   );
 }
