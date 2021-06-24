@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
-    "paths": {
-      "react-audio-visualizers-core": ["packages/react-audio-visualizers-core/src"]
-    },
     "target": "es5",
     "lib": [
       "dom",
