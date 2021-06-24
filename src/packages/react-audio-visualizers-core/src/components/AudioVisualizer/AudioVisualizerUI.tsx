@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState, useContext, useEffect } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
 
@@ -18,7 +18,7 @@ export const AudioVisualizerUI = ({ audio }: AudioVisualizerUIProps) => {
     return () => {
       visualizerController.clean();
     };
-  }, []);
+  }, [audio]);
 
   return (
     <div>
