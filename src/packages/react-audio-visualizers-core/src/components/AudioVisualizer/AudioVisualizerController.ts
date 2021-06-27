@@ -1,5 +1,7 @@
 import { AudioVisualizerContext } from './AudioVisualizerProvider';
 
+const DEFAULT_SMOOTHING_TIME_CONSTANT = 0.85;
+const DEFAULT_FFT_SIZE = 2048;
 export class AudioVisualizerController {
   private audioContext: AudioContext;
   private audioSource: AudioBufferSourceNode | null = null;
@@ -9,10 +11,15 @@ export class AudioVisualizerController {
   private startedAt: number = 0;
   private pausedAt: number = 0;
 
-  constructor(context: AudioVisualizerContext) {
+  constructor(
+    context: AudioVisualizerContext,
+    smoothingTimeConstant = DEFAULT_SMOOTHING_TIME_CONSTANT,
+    fftSize = DEFAULT_FFT_SIZE,
+  ) {
     this.audioContext = new AudioContext();
     this.analyser = this.audioContext.createAnalyser();
-    this.analyser.smoothingTimeConstant = 0.85;
+    this.analyser.smoothingTimeConstant = smoothingTimeConstant;
+    this.analyser.fftSize = fftSize;
     this.context = context;
     this.analyser.connect(this.audioContext.destination);
   }

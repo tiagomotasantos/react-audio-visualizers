@@ -4,11 +4,19 @@ import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
 
 interface AudioVisualizerUIProps {
   audio: string;
+  smoothingTimeConstant?: number;
+  fftSize?: number;
 }
 
-export const AudioVisualizerUI = ({ audio }: AudioVisualizerUIProps) => {
+export const AudioVisualizerUI = ({
+  audio,
+  smoothingTimeConstant,
+  fftSize,
+}: AudioVisualizerUIProps) => {
   const context = useContext(AudioVisualizerContextProvider);
-  const controller = useRef<AudioVisualizerController>(new AudioVisualizerController(context));
+  const controller = useRef<AudioVisualizerController>(new AudioVisualizerController(
+    context, smoothingTimeConstant, fftSize
+  ));
   
   useEffect(() => {
     const visualizerController = controller.current;
