@@ -25,13 +25,18 @@ export class AudioVisualizerController {
   }
 
   async loadAudio(url: string) {
-    const response = await fetch(url);
-    const arrayBuffer = await response.arrayBuffer();
-    
-    this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
-
-    this.context.setAudioContext(this.audioContext);
-    this.context.setAnalyser(this.analyser);
+    try {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      
+      this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
+  
+      this.context.setAudioContext(this.audioContext);
+      this.context.setAnalyser(this.analyser);
+    } catch (error) {
+      // TODO: Events (call error event)
+      throw error;
+    }
   }
 
   play() {
