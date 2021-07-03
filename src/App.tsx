@@ -1,6 +1,9 @@
-import { AudioVisualizer } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizer, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
 
 function App() {
+  const { analyser } = useAudioVisualizerContext();
+
+  console.log('audio context:', analyser);
   return (
     <div>
       <AudioVisualizer audio="https://media1.vocaroo.com/mp3/111ewAKiEfXZ">
