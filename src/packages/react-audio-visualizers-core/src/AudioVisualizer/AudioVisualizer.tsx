@@ -1,7 +1,9 @@
-import { ReactElement, useContext } from 'react';
-import { Canvas, Props as CanvasProps } from '@react-three/fiber';
-import { AudioVisualizerContextProvider, AudioVisualizerProvider } from './AudioVisualizerProvider';
+import { ReactElement } from 'react';
+import { Props as CanvasProps } from '@react-three/fiber';
+import { AudioVisualizerProvider } from './AudioVisualizerProvider';
 import { AudioVisualizerUI } from './AudioVisualizerUI';
+import { AudioVisualizerScene } from './AudioVisualizerScene';
+
 export interface AudioVisualizerProps {
   children: ReactElement;
 }
@@ -19,21 +21,15 @@ export const AudioVisualizer = ({
   canvasProps,
   smoothingTimeConstant,
   fftSize,
-}: AudioVisualizerProps & AudioVisualizerCommonProps) => {
-  const context = useContext(AudioVisualizerContextProvider);
-
-  return (
-    <AudioVisualizerProvider>
-      <AudioVisualizerUI
-        audio={audio}
-        smoothingTimeConstant={smoothingTimeConstant}
-        fftSize={fftSize}
-      />
-      <Canvas {...canvasProps}>
-        <AudioVisualizerContextProvider.Provider value={context}>
-          {children}
-        </AudioVisualizerContextProvider.Provider>
-      </Canvas>
-    </AudioVisualizerProvider>
-  );
-};
+}: AudioVisualizerProps & AudioVisualizerCommonProps) => (
+  <AudioVisualizerProvider>
+    <AudioVisualizerUI
+      audio={audio}
+      smoothingTimeConstant={smoothingTimeConstant}
+      fftSize={fftSize}
+    />
+    <AudioVisualizerScene canvasProps={canvasProps}>
+      {children}
+    </AudioVisualizerScene>
+  </AudioVisualizerProvider>
+);
