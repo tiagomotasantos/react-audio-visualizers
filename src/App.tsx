@@ -1,16 +1,23 @@
 import { AudioVisualizer, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
 
-function App() {
+const Box = () => {
   const { analyser } = useAudioVisualizerContext();
 
   console.log('audio context:', analyser);
   return (
+    <mesh>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color={'hotpink'} />
+    </mesh>
+  );
+};
+
+
+function App() {
+  return (
     <div>
       <AudioVisualizer audio="https://media1.vocaroo.com/mp3/111ewAKiEfXZ">
-        <mesh>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color={'hotpink'} />
-        </mesh>
+        <Box/>
       </AudioVisualizer>
     </div>
   );
