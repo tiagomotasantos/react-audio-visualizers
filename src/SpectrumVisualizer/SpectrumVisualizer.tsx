@@ -34,7 +34,7 @@ export const SpectrumVisualizer = (props: SpectrumVisualizerProps) => {
   } = props;
 
   return (
-    <AudioVisualizer {...audioVisualizerCommonProps}>
+    <AudioVisualizer canvasProps={{ orthographic: true }} {...audioVisualizerCommonProps}>
       <SpectrumVisualizerThemeComponent {...props} />
     </AudioVisualizer>
   );
