@@ -35,7 +35,6 @@ export const RoundBarsSpectrumVisualizer = ({
   const halfSpacing = spacing / 2;
   const [bars, setBars] = useState<ReactNode[]>([]);
 
-
   useFrame(() => {
     if (analyser && audioContext) {
       const dataArray = new Uint8Array(analyser.frequencyBinCount);
