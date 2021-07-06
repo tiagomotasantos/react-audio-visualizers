@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import * as THREE from 'three';
 
-const WIDTH = 0.12;
-const CURVE_HEIGHT = 0.06;
+const WIDTH = 12;
+const CURVE_HEIGHT = 6;
 
 interface BarProps {
   position: [number, number];

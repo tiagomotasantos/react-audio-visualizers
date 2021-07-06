@@ -7,11 +7,11 @@ const DEFAULT_MARGIN = 0.5;
 const DEFAULT_NUM_BARS = 63;
 
 // in world units
-const REFERENCE_SPECTRUM_WIDTH = 12.65;
+const REFERENCE_SPECTRUM_WIDTH = 1265;
 const MIN_DECIBEL = 0;
 const MAX_DECIBEL = 255;
-const MIN_BAR_HEIGHT = 0.1;
-const MAX_BAR_HEIGHT = 2;
+const MIN_BAR_HEIGHT = 10;
+const MAX_BAR_HEIGHT = 200;
 
 // frequency interval to show in Hz
 const LOW_FREQUENCY_LIMIT = 20;
