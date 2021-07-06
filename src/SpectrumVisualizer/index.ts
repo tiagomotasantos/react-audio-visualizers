@@ -1,1 +1,2 @@
-export { SpectrumVisualizer, SpectrumVisualizerTheme } from './SpectrumVisualizer';
+export { SpectrumVisualizer } from './SpectrumVisualizer';
+export { SpectrumVisualizerTheme } from './types';

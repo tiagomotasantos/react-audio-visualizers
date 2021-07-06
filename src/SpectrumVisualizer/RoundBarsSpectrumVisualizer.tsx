@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
+import { SpectrumVisualizerProps } from './types';
 import { Bar } from './Bar';
 
 const DEFAULT_MARGIN = 0.5;
@@ -17,7 +18,7 @@ const MAX_BAR_HEIGHT = 200;
 const LOW_FREQUENCY_LIMIT = 20;
 const HIGH_FREQUENCY_LIMIT = 20000;
 
-interface RoundBarsSpectrumVisualizerProps {
+interface RoundBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'color' | 'lowFrequency' | 'highFrequency'> {
   numBars?: number;
   margin?: number;
 }
@@ -25,6 +26,9 @@ interface RoundBarsSpectrumVisualizerProps {
 export const RoundBarsSpectrumVisualizer = ({
   numBars,
   margin = DEFAULT_MARGIN,
+  color,
+  lowFrequency,
+  highFrequency,
 }: RoundBarsSpectrumVisualizerProps) => {
   const { audioContext, analyser } = useAudioVisualizerContext();
   const { viewport: { width } } = useThree();
@@ -42,12 +46,19 @@ export const RoundBarsSpectrumVisualizer = ({
 
       analyser.getByteFrequencyData(dataArray);
       
-      const filteredData = AudioVisualizerUtils.filterFrequencies(LOW_FREQUENCY_LIMIT, HIGH_FREQUENCY_LIMIT, dataArray, audioContext.sampleRate);
+      const filteredData = AudioVisualizerUtils.filterFrequencies(lowFrequency || LOW_FREQUENCY_LIMIT, highFrequency || HIGH_FREQUENCY_LIMIT, dataArray, audioContext.sampleRate);
       const interval = Math.floor(filteredData.length / nBars);
 
       for (let i = 0; i < nBars; i++) {
         const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) || MIN_BAR_HEIGHT;
-        bars.push(<Bar key={i} height={height} position={[spacing * i + halfSpacing - halfSpectrumWidth, 0]} />);
+        bars.push(
+          <Bar
+            key={i}
+            height={height}
+            position={[spacing * i + halfSpacing - halfSpectrumWidth, 0]}
+            color="#FFC0CB"
+          />
+        );
       }
 
       setBars(bars);
