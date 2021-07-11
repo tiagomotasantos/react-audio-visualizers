@@ -1,35 +1,15 @@
+import { Color } from 'packages/react-audio-visualizers-core/src';
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import { Color } from './types';
 
 const WIDTH = 12;
 const CURVE_HEIGHT = 6;
-
-const vertexShader = `
-  varying vec2 vUv;
-
-  void main() {
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-  }
-`;
-
-const fragmentShader = `
-  uniform vec3 color1;
-  uniform vec3 color2;
-
-  varying vec2 vUv;
-
-  void main() {
-    
-    gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
-  }
-`;
+const DEFAULT_COLOR = 'white';
 
 interface BarProps {
   position: [number, number];
   height: number;
-  color: Color;
+  color?: Color;
 }
 
 export const Bar = ({ position: [x, y], height, color }: BarProps) => {
@@ -50,14 +30,7 @@ export const Bar = ({ position: [x, y], height, color }: BarProps) => {
   return (
     <mesh>
       <shapeBufferGeometry args={[shape]} />
-      <shaderMaterial 
-        uniforms={{
-          color1: { value: new THREE.Color(0xffffff) },
-          color2: { value: new THREE.Color(0x000000) }
-        }}
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-      />
+      <meshBasicMaterial color={color || DEFAULT_COLOR} />
     </mesh>
   );
 };
