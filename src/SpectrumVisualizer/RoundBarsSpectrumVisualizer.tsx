@@ -32,11 +32,11 @@ export const RoundBarsSpectrumVisualizer = ({
   highFrequency,
 }: RoundBarsSpectrumVisualizerProps) => {
   const { audioContext, analyser } = useAudioVisualizerContext();
-  const { viewport } = useThree();
-  const spectrumWidth = viewport.width - margin;
+  const { viewport: {width: viewportWidth, height: viewportHeight} } = useThree();
+  const spectrumWidth = viewportWidth - margin;
   const halfSpectrumWidth = spectrumWidth / 2;
-  const halfSpectrumHeight = viewport.height / 2;
-  const nBars = numBars || viewport.width * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH;
+  const halfSpectrumHeight = viewportHeight / 2;
+  const nBars = numBars || viewportWidth * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH;
   const spacing = spectrumWidth / nBars;
   const [bars, setBars] = useState<ReactNode[]>([]);
 
@@ -51,7 +51,7 @@ export const RoundBarsSpectrumVisualizer = ({
       const interval = Math.floor(filteredData.length / nBars);
 
       for (let i = 0; i < nBars; i++) {
-        const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewport.height - DEFAULT_MARGIN_HEIGHT) || MIN_BAR_HEIGHT;
+        const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewportHeight - DEFAULT_MARGIN_HEIGHT) || MIN_BAR_HEIGHT;
         bars.push(
           <Bar
             key={i}
