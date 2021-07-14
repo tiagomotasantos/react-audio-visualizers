@@ -4,15 +4,16 @@ import { AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-
 import { SpectrumVisualizerProps } from './SpectrumVisualizer';
 import { Bar } from './Bar';
 
-const DEFAULT_MARGIN = 0.5;
+const DEFAULT_MARGIN = 15;
+const DEFAULT_MARGIN_HEIGHT = 5;
 const DEFAULT_NUM_BARS = 63;
 
 // in world units
 const REFERENCE_SPECTRUM_WIDTH = 1265;
+const MIN_BAR_HEIGHT = 10;
+
 const MIN_DECIBEL = 0;
 const MAX_DECIBEL = 255;
-const MIN_BAR_HEIGHT = 10;
-const MAX_BAR_HEIGHT = 200;
 
 // frequency interval to show in Hz
 const LOW_FREQUENCY_LIMIT = 20;
@@ -31,12 +32,12 @@ export const RoundBarsSpectrumVisualizer = ({
   highFrequency,
 }: RoundBarsSpectrumVisualizerProps) => {
   const { audioContext, analyser } = useAudioVisualizerContext();
-  const { viewport: { width } } = useThree();
-  const spectrumWidth = width - margin;
+  const { viewport } = useThree();
+  const spectrumWidth = viewport.width - margin;
   const halfSpectrumWidth = spectrumWidth / 2;
-  const nBars = numBars || width * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH;
+  const halfSpectrumHeight = viewport.height / 2;
+  const nBars = numBars || viewport.width * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH;
   const spacing = spectrumWidth / nBars;
-  const halfSpacing = spacing / 2;
   const [bars, setBars] = useState<ReactNode[]>([]);
 
   useFrame(() => {
@@ -50,12 +51,12 @@ export const RoundBarsSpectrumVisualizer = ({
       const interval = Math.floor(filteredData.length / nBars);
 
       for (let i = 0; i < nBars; i++) {
-        const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, MAX_BAR_HEIGHT) || MIN_BAR_HEIGHT;
+        const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewport.height - DEFAULT_MARGIN_HEIGHT) || MIN_BAR_HEIGHT;
         bars.push(
           <Bar
             key={i}
             height={height}
-            position={[spacing * i + halfSpacing - halfSpectrumWidth, 0]}
+            position={[spacing * i - halfSpectrumWidth, -halfSpectrumHeight + MIN_BAR_HEIGHT * 2 + DEFAULT_MARGIN_HEIGHT]}
             color={color}
           />
         );
