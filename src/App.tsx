@@ -14,9 +14,9 @@ import { SpectrumVisualizer, SpectrumVisualizerTheme } from 'SpectrumVisualizer'
 
 function App() {
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <SpectrumVisualizer
-        audio="https://media1.vocaroo.com/mp3/111ewAKiEfXZ"
+        audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
         theme={SpectrumVisualizerTheme.roundBars}
         color={0xff9633}
       />
