@@ -3,6 +3,7 @@ import { Props as CanvasProps } from '@react-three/fiber';
 import { AudioVisualizerProvider } from './AudioVisualizerProvider';
 import { AudioVisualizerUI } from './AudioVisualizerUI';
 import { AudioVisualizerScene } from './AudioVisualizerScene';
+import './styles.css';
 
 export interface AudioVisualizerProps {
   children: ReactElement;
@@ -23,13 +24,15 @@ export const AudioVisualizer = ({
   fftSize,
 }: AudioVisualizerProps & AudioVisualizerCommonProps) => (
   <AudioVisualizerProvider>
-    <AudioVisualizerUI
-      audio={audio}
-      smoothingTimeConstant={smoothingTimeConstant}
-      fftSize={fftSize}
-    />
-    <AudioVisualizerScene canvasProps={canvasProps}>
-      {children}
-    </AudioVisualizerScene>
+    <div className="audio-visualizer">
+      <AudioVisualizerUI
+        audio={audio}
+        smoothingTimeConstant={smoothingTimeConstant}
+        fftSize={fftSize}
+      />
+      <AudioVisualizerScene canvasProps={canvasProps}>
+        {children}
+      </AudioVisualizerScene>
+    </div>
   </AudioVisualizerProvider>
 );

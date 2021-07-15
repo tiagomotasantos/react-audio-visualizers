@@ -1,0 +1,15 @@
+.audio-visualizer {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.audio-visualizer .audio-visualizer-ui {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+}
