@@ -1,6 +1,7 @@
-import { useRef, useContext, useEffect } from 'react';
+import { useRef, useCallback, useContext, useEffect, useState } from 'react';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
+import { PlayIcon, PauseIcon } from './icons';
 
 interface AudioVisualizerUIProps {
   audio: string;
@@ -17,6 +18,15 @@ export const AudioVisualizerUI = ({
   const controller = useRef<AudioVisualizerController>(new AudioVisualizerController(
     context, smoothingTimeConstant, fftSize
   ));
+  const [playing, setPlaying] = useState(false);
+  const play = useCallback(() => {
+    controller.current.play();
+    setPlaying(true);
+  }, [controller, setPlaying]);
+  const pause = useCallback(() => {
+    controller.current.pause();
+    setPlaying(false);
+  }, [controller, setPlaying]);
   
   useEffect(() => {
     const visualizerController = controller.current;
@@ -29,8 +39,17 @@ export const AudioVisualizerUI = ({
   }, [audio]);
 
   return (
-    <div>
-      ADD PLAY/PAUSE UI HERE
+    <div className="audio-visualizer-ui">
+      {playing ? (
+        <button onClick={pause}>
+          <PauseIcon />
+        </button>
+      ) : (
+        <button onClick={play}>
+          <PlayIcon />
+        </button>
+      )}
+
     </div>
   );
 };
