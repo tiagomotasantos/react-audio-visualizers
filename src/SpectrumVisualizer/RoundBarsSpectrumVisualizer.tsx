@@ -53,7 +53,7 @@ export const RoundBarsSpectrumVisualizer = ({
       for (let i = 0; i < nBars; i++) {
         const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewportHeight - DEFAULT_MARGIN_HEIGHT) || MIN_BAR_HEIGHT;
         const x = spacing * i - halfSpectrumWidth;
-        const y = -halfSpectrumHeight + MIN_BAR_HEIGHT * 2 + DEFAULT_MARGIN_HEIGHT;
+        const y = -halfSpectrumHeight + DEFAULT_MARGIN_HEIGHT;
 
         bars.push(
           <Bar
