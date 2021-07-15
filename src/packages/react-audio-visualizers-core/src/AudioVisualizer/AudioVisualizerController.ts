@@ -49,7 +49,7 @@ export class AudioVisualizerController {
     this.startedAt = this.audioContext.currentTime - offset;
   }
 
-  stop() {
+  pause() {
     const elapsed = this.audioContext.currentTime - this.startedAt;
 
     this.pausedAt = elapsed;
