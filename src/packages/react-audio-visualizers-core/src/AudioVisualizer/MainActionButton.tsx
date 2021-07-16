@@ -1,11 +1,7 @@
 import { ButtonHTMLAttributes } from 'react';
 
-interface MainActionButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  onClick: () => void;
-}
-
-export const MainActionButton = ({ children, onClick, ...props }: MainActionButtonProps) => (
-  <button className="main-action-button" onClick={onClick} {...props}>
+export const MainActionButton = ({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <button className="main-action-button" {...props}>
     {children}
   </button>
 );
