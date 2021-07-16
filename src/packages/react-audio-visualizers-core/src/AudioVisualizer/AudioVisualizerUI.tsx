@@ -27,6 +27,7 @@ export const AudioVisualizerUI = ({
     context, smoothingTimeConstant, fftSize
   ));
   const [playing, setPlaying] = useState(false);
+  const [hovering, setHovering] = useState(false);
   const play = useCallback(() => {
     controller.current.play();
     setPlaying(true);
@@ -35,6 +36,8 @@ export const AudioVisualizerUI = ({
     controller.current.pause();
     setPlaying(false);
   }, [controller, setPlaying]);
+  const onMouseEnter = useCallback(() => setHovering(true), [setHovering]);
+  const onMouseLeave = useCallback(() => setHovering(false), [setHovering]);
   
   useEffect(() => {
     const visualizerController = controller.current;
@@ -49,12 +52,12 @@ export const AudioVisualizerUI = ({
   return (
     <div className="audio-visualizer-ui">
       {playing ? (
-        <MainActionButton onClick={pause}>
-          {showMainActionIcon && <PauseIcon fill={iconsColor} />}
+        <MainActionButton onClick={pause} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          {showMainActionIcon && hovering && <PauseIcon fill={iconsColor} />}
         </MainActionButton>
       ) : (
-        <MainActionButton onClick={play}>
-          {showMainActionIcon && <PlayIcon fill={iconsColor} />}
+        <MainActionButton onClick={play} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          {showMainActionIcon && hovering && <PlayIcon fill={iconsColor} />}
         </MainActionButton>
       )}
 
