@@ -2,17 +2,22 @@ import { useRef, useCallback, useContext, useEffect, useState } from 'react';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
 import { PlayIcon, PauseIcon } from './icons';
+import { MainActionButton } from './MainActionButton';
+
+const DEFAULT_ICONS_COLOR = 'white';
 
 interface AudioVisualizerUIProps {
   audio: string;
   smoothingTimeConstant?: number;
   fftSize?: number;
+  iconsColor?: string;
 }
 
 export const AudioVisualizerUI = ({
   audio,
   smoothingTimeConstant,
   fftSize,
+  iconsColor = DEFAULT_ICONS_COLOR,
 }: AudioVisualizerUIProps) => {
   const context = useContext(AudioVisualizerContextProvider);
   const controller = useRef<AudioVisualizerController>(new AudioVisualizerController(
@@ -41,13 +46,13 @@ export const AudioVisualizerUI = ({
   return (
     <div className="audio-visualizer-ui">
       {playing ? (
-        <button onClick={pause}>
-          <PauseIcon />
-        </button>
+        <MainActionButton onClick={pause}>
+          <PauseIcon fill={iconsColor} />
+        </MainActionButton>
       ) : (
-        <button onClick={play}>
-          <PlayIcon />
-        </button>
+        <MainActionButton onClick={play}>
+          <PlayIcon fill={iconsColor} />
+        </MainActionButton>
       )}
 
     </div>

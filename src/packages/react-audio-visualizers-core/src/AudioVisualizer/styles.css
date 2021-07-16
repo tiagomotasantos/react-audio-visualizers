@@ -12,4 +12,13 @@
   justify-content: center;
   position: absolute;
   width: 100%;
+  z-index: 1;
+}
+
+.audio-visualizer-ui .main-action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
 }
