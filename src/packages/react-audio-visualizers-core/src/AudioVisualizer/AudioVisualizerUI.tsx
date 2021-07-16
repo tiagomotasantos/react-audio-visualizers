@@ -5,12 +5,14 @@ import { PlayIcon, PauseIcon } from './icons';
 import { MainActionButton } from './MainActionButton';
 
 const DEFAULT_ICONS_COLOR = 'white';
+const DEFAULT_SHOW_MAIN_ACTION_ICON = false;
 
 interface AudioVisualizerUIProps {
   audio: string;
   smoothingTimeConstant?: number;
   fftSize?: number;
   iconsColor?: string;
+  showMainActionIcon?: boolean;
 }
 
 export const AudioVisualizerUI = ({
@@ -18,6 +20,7 @@ export const AudioVisualizerUI = ({
   smoothingTimeConstant,
   fftSize,
   iconsColor = DEFAULT_ICONS_COLOR,
+  showMainActionIcon = DEFAULT_SHOW_MAIN_ACTION_ICON,
 }: AudioVisualizerUIProps) => {
   const context = useContext(AudioVisualizerContextProvider);
   const controller = useRef<AudioVisualizerController>(new AudioVisualizerController(
@@ -47,11 +50,11 @@ export const AudioVisualizerUI = ({
     <div className="audio-visualizer-ui">
       {playing ? (
         <MainActionButton onClick={pause}>
-          <PauseIcon fill={iconsColor} />
+          {showMainActionIcon && <PauseIcon fill={iconsColor} />}
         </MainActionButton>
       ) : (
         <MainActionButton onClick={play}>
-          <PlayIcon fill={iconsColor} />
+          {showMainActionIcon && <PlayIcon fill={iconsColor} />}
         </MainActionButton>
       )}
 

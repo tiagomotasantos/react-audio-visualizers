@@ -15,6 +15,7 @@ export interface AudioVisualizerCommonProps {
   smoothingTimeConstant?: number;
   fftSize?: number;
   iconsColor?: string;
+  showMainActionIcon?: boolean;
 }
 
 export const AudioVisualizer = ({
@@ -24,6 +25,7 @@ export const AudioVisualizer = ({
   smoothingTimeConstant,
   fftSize,
   iconsColor,
+  showMainActionIcon,
 }: AudioVisualizerProps & AudioVisualizerCommonProps) => (
   <AudioVisualizerProvider>
     <div className="audio-visualizer">
@@ -32,6 +34,7 @@ export const AudioVisualizer = ({
         smoothingTimeConstant={smoothingTimeConstant}
         fftSize={fftSize}
         iconsColor={iconsColor}
+        showMainActionIcon={showMainActionIcon}
       />
       <AudioVisualizerScene canvasProps={canvasProps}>
         {children}
