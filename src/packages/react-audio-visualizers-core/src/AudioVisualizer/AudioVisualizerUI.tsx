@@ -1,4 +1,5 @@
 import { useRef, useCallback, useContext, useEffect, useState } from 'react';
+import { Audio } from '../types';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
 import { PlayIcon, PauseIcon } from './icons';
@@ -8,7 +9,7 @@ const DEFAULT_ICONS_COLOR = 'white';
 const DEFAULT_SHOW_MAIN_ACTION_ICON = false;
 
 interface AudioVisualizerUIProps {
-  audio: string;
+  audio?: Audio;
   smoothingTimeConstant?: number;
   fftSize?: number;
   iconsColor?: string;
@@ -42,25 +43,24 @@ export const AudioVisualizerUI = ({
   useEffect(() => {
     const visualizerController = controller.current;
     
-    visualizerController.loadAudio(audio);
-
-    return () => {
-      visualizerController.clean();
-    };
+    if (audio) {
+      visualizerController.loadAudio(audio);
+    }
   }, [audio]);
 
   return (
     <div className="audio-visualizer-ui">
-      {playing ? (
-        <MainActionButton onClick={pause} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          {showMainActionIcon && hovering && <PauseIcon fill={iconsColor} />}
-        </MainActionButton>
-      ) : (
-        <MainActionButton onClick={play} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          {showMainActionIcon && hovering && <PlayIcon fill={iconsColor} />}
-        </MainActionButton>
+      {audio && (
+        playing ? (
+          <MainActionButton onClick={pause} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {showMainActionIcon && hovering && <PauseIcon fill={iconsColor} />}
+          </MainActionButton>
+        ) : (
+          <MainActionButton onClick={play} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {showMainActionIcon && hovering && <PlayIcon fill={iconsColor} />}
+          </MainActionButton>
+        )
       )}
-
     </div>
   );
 };

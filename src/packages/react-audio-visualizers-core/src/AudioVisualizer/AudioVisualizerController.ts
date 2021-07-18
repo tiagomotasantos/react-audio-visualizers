@@ -1,4 +1,6 @@
+import { Audio } from '../types';
 import { AudioVisualizerContext } from './AudioVisualizerProvider';
+import { AudioVisualizerLoaderFactory } from './loaders';
 
 const DEFAULT_SMOOTHING_TIME_CONSTANT = 0.85;
 const DEFAULT_FFT_SIZE = 2048;
@@ -24,10 +26,10 @@ export class AudioVisualizerController {
     this.analyser.connect(this.audioContext.destination);
   }
 
-  async loadAudio(url: string) {
+  async loadAudio(audio: Audio) {
     try {
-      const response = await fetch(url);
-      const arrayBuffer = await response.arrayBuffer();
+      const loader = AudioVisualizerLoaderFactory.newAudioVisualizerLoader(audio);
+      const arrayBuffer = await loader.loadAudio(audio);
       
       this.audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
   
