@@ -4,13 +4,14 @@ import { AudioVisualizerProvider } from './AudioVisualizerProvider';
 import { AudioVisualizerUI } from './AudioVisualizerUI';
 import { AudioVisualizerScene } from './AudioVisualizerScene';
 import './styles.css';
+import { Audio } from '../types';
 
 export interface AudioVisualizerProps {
   children: ReactElement;
 }
 
 export interface AudioVisualizerCommonProps {
-  audio: string;
+  audio?: Audio;
   canvasProps?: Omit<CanvasProps, 'children'>;
   smoothingTimeConstant?: number;
   fftSize?: number;
