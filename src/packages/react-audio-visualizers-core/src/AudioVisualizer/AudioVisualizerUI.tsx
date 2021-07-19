@@ -12,6 +12,7 @@ interface AudioVisualizerUIProps {
   audio?: Audio;
   smoothingTimeConstant?: number;
   fftSize?: number;
+  volume?: number;
   iconsColor?: string;
   showMainActionIcon?: boolean;
 }
@@ -20,6 +21,7 @@ export const AudioVisualizerUI = ({
   audio,
   smoothingTimeConstant,
   fftSize,
+  volume,
   iconsColor = DEFAULT_ICONS_COLOR,
   showMainActionIcon = DEFAULT_SHOW_MAIN_ACTION_ICON,
 }: AudioVisualizerUIProps) => {
@@ -47,6 +49,14 @@ export const AudioVisualizerUI = ({
       visualizerController.loadAudio(audio);
     }
   }, [audio]);
+
+  useEffect(() => {
+    const visualizerController = controller.current;
+
+    if (volume !== undefined && !isNaN(volume)) {
+      visualizerController.setVolume(volume);
+    }
+  }, [volume]);
 
   return (
     <div className="audio-visualizer-ui">

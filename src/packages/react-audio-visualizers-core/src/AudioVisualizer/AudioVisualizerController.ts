@@ -8,6 +8,7 @@ export class AudioVisualizerController {
   private audioContext: AudioContext;
   private audioSource: AudioBufferSourceNode | null = null;
   private audioBuffer: AudioBuffer | null = null;
+  private gain: GainNode;
   private analyser: AnalyserNode;
   private context: AudioVisualizerContext;
   private startedAt: number = 0;
@@ -19,10 +20,12 @@ export class AudioVisualizerController {
     fftSize = DEFAULT_FFT_SIZE,
   ) {
     this.audioContext = new AudioContext();
+    this.gain = this.audioContext.createGain();
     this.analyser = this.audioContext.createAnalyser();
     this.analyser.smoothingTimeConstant = smoothingTimeConstant;
     this.analyser.fftSize = fftSize;
     this.context = context;
+    this.gain.connect(this.analyser);
     this.analyser.connect(this.audioContext.destination);
   }
 
@@ -45,7 +48,7 @@ export class AudioVisualizerController {
     const offset = this.pausedAt;
 
     this.audioSource = this.audioContext.createBufferSource();
-    this.audioSource.connect(this.analyser);
+    this.audioSource.connect(this.gain);
     this.audioSource.buffer = this.audioBuffer;
     this.audioSource.start(0, offset);
     this.startedAt = this.audioContext.currentTime - offset;
@@ -60,6 +63,10 @@ export class AudioVisualizerController {
       this.audioSource.disconnect();
       this.audioSource.stop();
     }
+  }
+
+  setVolume(volume: number) {
+    this.gain.gain.value = volume;
   }
 
   clean() {
