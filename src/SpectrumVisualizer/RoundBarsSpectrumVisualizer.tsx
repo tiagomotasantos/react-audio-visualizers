@@ -5,7 +5,8 @@ import { SpectrumVisualizerProps } from './SpectrumVisualizer';
 import { Bar } from './Bar';
 
 const DEFAULT_MARGIN = 15;
-const DEFAULT_MARGIN_HEIGHT = 5;
+const DEFAULT_MARGIN_HEIGHT_TOP = 10;
+const DEFAULT_MARGIN_HEIGHT_BOTTOM = 5;
 const DEFAULT_NUM_BARS = 63;
 
 // in world units
@@ -51,9 +52,9 @@ export const RoundBarsSpectrumVisualizer = ({
       const interval = Math.floor(filteredData.length / nBars);
 
       for (let i = 0; i < nBars; i++) {
-        const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewportHeight - DEFAULT_MARGIN_HEIGHT) || MIN_BAR_HEIGHT;
+        const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewportHeight - DEFAULT_MARGIN_HEIGHT_TOP) || MIN_BAR_HEIGHT;
         const x = spacing * i - halfSpectrumWidth;
-        const y = -halfSpectrumHeight + DEFAULT_MARGIN_HEIGHT;
+        const y = -halfSpectrumHeight + DEFAULT_MARGIN_HEIGHT_BOTTOM;
 
         bars.push(
           <Bar
