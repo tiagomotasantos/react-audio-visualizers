@@ -17,6 +17,7 @@ function App() {
     <div style={{ height: '100%' }}>
       <SpectrumVisualizer
         audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
+        volume={1}
         theme={SpectrumVisualizerTheme.roundBars}
         color={0xff9670}
         iconsColor="#ff9670"
