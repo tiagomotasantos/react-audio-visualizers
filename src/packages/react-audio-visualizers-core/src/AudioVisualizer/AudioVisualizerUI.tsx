@@ -1,5 +1,7 @@
 import { useRef, useCallback, useContext, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { Audio } from '../types';
+import { MainAction, MainActionRender } from './AudioVisualizer';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
 import { LoaderIcon, PlayIcon, PauseIcon } from './icons';
@@ -15,6 +17,7 @@ interface AudioVisualizerUIProps {
   fftSize?: number;
   volume?: number;
   iconsColor?: string;
+  mainActionRender?: (action: MainAction) => MainActionRender;
   showMainActionIcon?: boolean;
   showLoaderIcon?: boolean;
 }
@@ -24,6 +27,7 @@ export const AudioVisualizerUI = ({
   smoothingTimeConstant,
   fftSize,
   volume,
+  mainActionRender,
   iconsColor = DEFAULT_ICONS_COLOR,
   showMainActionIcon = DEFAULT_SHOW_MAIN_ACTION_ICON,
   showLoaderIcon = DEFAULT_SHOW_LOADER_ICON,
@@ -61,6 +65,17 @@ export const AudioVisualizerUI = ({
       visualizerController.setVolume(volume);
     }
   }, [volume]);
+
+  useEffect(() => {
+    if (mainActionRender) {
+      const { id, node } = mainActionRender({ play, pause });
+      const container = document.getElementById(id);
+
+      if (container) {
+        ReactDOM.render(node, container);
+      }
+    }
+  }, [mainActionRender, play, pause]);
 
   return (
     <div className="audio-visualizer-ui">

@@ -17,10 +17,21 @@ export interface AudioVisualizerCommonProps {
   fftSize?: number;
   volume?: number;
   iconsColor?: string;
+  mainActionRender?: (action: MainAction) => MainActionRender;
   showMainActionIcon?: boolean;
   showLoaderIcon?: boolean;
   backgroundColor?: string;
   backgroundImage?: string;
+}
+
+export interface MainAction {
+  play: () => void;
+  pause: () => void;
+}
+
+export interface MainActionRender {
+  id: string;
+  node: ReactElement;
 }
 
 export const AudioVisualizer = ({
@@ -35,6 +46,7 @@ export const AudioVisualizer = ({
   showLoaderIcon,
   backgroundColor,
   backgroundImage,
+  mainActionRender,
 }: AudioVisualizerProps & AudioVisualizerCommonProps) => (
   <AudioVisualizerProvider>
     <div className="audio-visualizer">
@@ -44,6 +56,7 @@ export const AudioVisualizer = ({
         fftSize={fftSize}
         volume={volume}
         iconsColor={iconsColor}
+        mainActionRender={mainActionRender}
         showMainActionIcon={showMainActionIcon}
         showLoaderIcon={showLoaderIcon}
       />
