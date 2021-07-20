@@ -18,6 +18,8 @@ export interface AudioVisualizerCommonProps {
   volume?: number;
   iconsColor?: string;
   showMainActionIcon?: boolean;
+  backgroundColor?: string;
+  backgroundImage?: string;
 }
 
 export const AudioVisualizer = ({
@@ -29,6 +31,8 @@ export const AudioVisualizer = ({
   volume,
   iconsColor,
   showMainActionIcon,
+  backgroundColor,
+  backgroundImage,
 }: AudioVisualizerProps & AudioVisualizerCommonProps) => (
   <AudioVisualizerProvider>
     <div className="audio-visualizer">
@@ -40,7 +44,11 @@ export const AudioVisualizer = ({
         iconsColor={iconsColor}
         showMainActionIcon={showMainActionIcon}
       />
-      <AudioVisualizerScene canvasProps={canvasProps}>
+      <AudioVisualizerScene
+        canvasProps={canvasProps}
+        backgroundColor={backgroundColor}
+        backgroundImage={backgroundImage}
+      >
         {children}
       </AudioVisualizerScene>
     </div>

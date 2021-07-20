@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { CSSProperties, useContext } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
 import { AudioVisualizerCommonProps, AudioVisualizerProps } from './AudioVisualizer';
@@ -6,11 +6,17 @@ import { AudioVisualizerCommonProps, AudioVisualizerProps } from './AudioVisuali
 export const AudioVisualizerScene = ({
   children,
   canvasProps,
-}: AudioVisualizerProps & Pick<AudioVisualizerCommonProps, 'canvasProps'>) => {
+  backgroundColor,
+  backgroundImage,
+}: AudioVisualizerProps & Pick<AudioVisualizerCommonProps, 'canvasProps' | 'backgroundColor' | 'backgroundImage'>) => {
   const context = useContext(AudioVisualizerContextProvider);
+  const style: CSSProperties = {
+    backgroundColor: backgroundColor,
+    backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+  };
 
   return (
-    <Canvas {...canvasProps}>
+    <Canvas style={style} {...canvasProps}>
       <AudioVisualizerContextProvider.Provider value={context}>
         {children}
       </AudioVisualizerContextProvider.Provider>
