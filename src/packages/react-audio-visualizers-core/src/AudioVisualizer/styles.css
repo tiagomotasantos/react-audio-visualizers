@@ -22,3 +22,36 @@
   height: 100%;
   width: 100%;
 }
+
+.audio-visualizer-ui .loader-bar {
+  animation: loader 1s linear infinite;
+  border-radius: 50px;
+  display: inline-block;
+  height: 55px;
+  margin-right: 5px;
+  width: 10px;
+}
+
+.audio-visualizer-ui .loader-bar-1 {
+  animation-delay: -0.1s;
+}
+
+.audio-visualizer-ui .loader-bar-2 {
+  animation-delay: -0.3s;
+}
+
+.audio-visualizer-ui .loader-bar-3 {
+  animation-delay: -0.6s;
+}
+
+@keyframes loader {
+  0% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.3);
+  }
+}
