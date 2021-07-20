@@ -23,6 +23,7 @@ function App() {
         iconsColor="#ff9670"
         backgroundColor="black"
         showMainActionIcon
+        showLoaderIcon
       />
     </div>
   );
