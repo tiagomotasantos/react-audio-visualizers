@@ -29,8 +29,10 @@ export class AudioVisualizerController {
     this.analyser.connect(this.audioContext.destination);
   }
 
-  async loadAudio(audio: Audio) {
+  async loadAudio(audio: Audio, setLoading: (loading: boolean) => void) {
     try {
+      setLoading(true);
+
       const loader = AudioVisualizerLoaderFactory.newAudioVisualizerLoader(audio);
       const arrayBuffer = await loader.loadAudio(audio);
       
@@ -41,6 +43,8 @@ export class AudioVisualizerController {
     } catch (error) {
       // TODO: Events (call error event)
       throw error;
+    } finally {
+      setLoading(false);
     }
   }
 

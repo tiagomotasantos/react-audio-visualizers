@@ -2,11 +2,12 @@ import { useRef, useCallback, useContext, useEffect, useState } from 'react';
 import { Audio } from '../types';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
-import { PlayIcon, PauseIcon } from './icons';
+import { LoaderIcon, PlayIcon, PauseIcon } from './icons';
 import { MainActionButton } from './MainActionButton';
 
 const DEFAULT_ICONS_COLOR = 'white';
 const DEFAULT_SHOW_MAIN_ACTION_ICON = false;
+const DEFAULT_SHOW_LOADER_ICON = false;
 
 interface AudioVisualizerUIProps {
   audio?: Audio;
@@ -15,6 +16,7 @@ interface AudioVisualizerUIProps {
   volume?: number;
   iconsColor?: string;
   showMainActionIcon?: boolean;
+  showLoaderIcon?: boolean;
 }
 
 export const AudioVisualizerUI = ({
@@ -24,6 +26,7 @@ export const AudioVisualizerUI = ({
   volume,
   iconsColor = DEFAULT_ICONS_COLOR,
   showMainActionIcon = DEFAULT_SHOW_MAIN_ACTION_ICON,
+  showLoaderIcon = DEFAULT_SHOW_LOADER_ICON,
 }: AudioVisualizerUIProps) => {
   const context = useContext(AudioVisualizerContextProvider);
   const controller = useRef<AudioVisualizerController>(new AudioVisualizerController(
@@ -31,6 +34,7 @@ export const AudioVisualizerUI = ({
   ));
   const [playing, setPlaying] = useState(false);
   const [hovering, setHovering] = useState(false);
+  const [loading, setLoading] = useState(false);
   const play = useCallback(() => {
     controller.current.play();
     setPlaying(true);
@@ -46,7 +50,7 @@ export const AudioVisualizerUI = ({
     const visualizerController = controller.current;
     
     if (audio) {
-      visualizerController.loadAudio(audio);
+      visualizerController.loadAudio(audio, setLoading);
     }
   }, [audio]);
 
@@ -60,15 +64,19 @@ export const AudioVisualizerUI = ({
 
   return (
     <div className="audio-visualizer-ui">
-      {audio && (
-        playing ? (
-          <MainActionButton onClick={pause} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            {showMainActionIcon && hovering && <PauseIcon fill={iconsColor} />}
-          </MainActionButton>
-        ) : (
-          <MainActionButton onClick={play} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            {showMainActionIcon && hovering && <PlayIcon fill={iconsColor} />}
-          </MainActionButton>
+      {showLoaderIcon && loading ? (
+        <LoaderIcon color={iconsColor} />
+      ) : (
+        audio && !loading && (
+          playing ? (
+            <MainActionButton onClick={pause} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+              {showMainActionIcon && hovering && <PauseIcon fill={iconsColor} />}
+            </MainActionButton>
+          ) : (
+            <MainActionButton onClick={play} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+              {showMainActionIcon && hovering && <PlayIcon fill={iconsColor} />}
+            </MainActionButton>
+          )
         )
       )}
     </div>
