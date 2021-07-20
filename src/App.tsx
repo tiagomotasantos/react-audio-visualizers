@@ -21,6 +21,7 @@ function App() {
         theme={SpectrumVisualizerTheme.roundBars}
         color={0xff9670}
         iconsColor="#ff9670"
+        backgroundColor="black"
         showMainActionIcon
       />
     </div>
