@@ -1,5 +1,6 @@
 import { Audio } from '../types';
 import { AudioVisualizerContext } from './AudioVisualizerProvider';
+import { AudioVisualizerEvents, emitter } from './events';
 import { AudioVisualizerLoaderFactory } from './loaders';
 
 const DEFAULT_SMOOTHING_TIME_CONSTANT = 0.85;
@@ -32,6 +33,7 @@ export class AudioVisualizerController {
   async loadAudio(audio: Audio, setLoading: (loading: boolean) => void) {
     try {
       setLoading(true);
+      emitter.emit(AudioVisualizerEvents.loading);
 
       const loader = AudioVisualizerLoaderFactory.newAudioVisualizerLoader(audio);
       const arrayBuffer = await loader.loadAudio(audio);
@@ -40,9 +42,9 @@ export class AudioVisualizerController {
   
       this.context.setAudioContext(this.audioContext);
       this.context.setAnalyser(this.analyser);
+      emitter.emit(AudioVisualizerEvents.loaded);
     } catch (error) {
-      // TODO: Events (call error event)
-      throw error;
+      emitter.emit(AudioVisualizerEvents.error, error);
     } finally {
       setLoading(false);
     }

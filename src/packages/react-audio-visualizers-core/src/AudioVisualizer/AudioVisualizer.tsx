@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { Props as CanvasProps } from '@react-three/fiber';
 import { Audio } from '../types';
+import { AudioVisualizerEventListener } from './events';
 import { AudioVisualizerProvider } from './AudioVisualizerProvider';
 import { AudioVisualizerUI } from './AudioVisualizerUI';
 import { AudioVisualizerScene } from './AudioVisualizerScene';
@@ -17,11 +18,12 @@ export interface AudioVisualizerCommonProps {
   fftSize?: number;
   volume?: number;
   iconsColor?: string;
-  mainActionRender?: (action: MainAction) => MainActionRender;
   showMainActionIcon?: boolean;
   showLoaderIcon?: boolean;
   backgroundColor?: string;
   backgroundImage?: string;
+  mainActionRender?: (action: MainAction) => MainActionRender;
+  onEvent?: AudioVisualizerEventListener;
 }
 
 export interface MainAction {
@@ -47,6 +49,7 @@ export const AudioVisualizer = ({
   backgroundColor,
   backgroundImage,
   mainActionRender,
+  onEvent,
 }: AudioVisualizerProps & AudioVisualizerCommonProps) => (
   <AudioVisualizerProvider>
     <div className="audio-visualizer">
@@ -56,9 +59,10 @@ export const AudioVisualizer = ({
         fftSize={fftSize}
         volume={volume}
         iconsColor={iconsColor}
-        mainActionRender={mainActionRender}
         showMainActionIcon={showMainActionIcon}
         showLoaderIcon={showLoaderIcon}
+        mainActionRender={mainActionRender}
+        onEvent={onEvent}
       />
       <AudioVisualizerScene
         canvasProps={canvasProps}

@@ -4,6 +4,7 @@ import { Audio } from '../types';
 import { MainAction, MainActionRender } from './AudioVisualizer';
 import { AudioVisualizerController } from './AudioVisualizerController';
 import { AudioVisualizerContextProvider } from './AudioVisualizerProvider';
+import { AudioVisualizerEventListener, AudioVisualizerEvents, emitter } from './events';
 import { LoaderIcon, PlayIcon, PauseIcon } from './icons';
 import { MainActionButton } from './MainActionButton';
 
@@ -17,9 +18,10 @@ interface AudioVisualizerUIProps {
   fftSize?: number;
   volume?: number;
   iconsColor?: string;
-  mainActionRender?: (action: MainAction) => MainActionRender;
   showMainActionIcon?: boolean;
   showLoaderIcon?: boolean;
+  mainActionRender?: (action: MainAction) => MainActionRender;
+  onEvent?: AudioVisualizerEventListener;
 }
 
 export const AudioVisualizerUI = ({
@@ -28,6 +30,7 @@ export const AudioVisualizerUI = ({
   fftSize,
   volume,
   mainActionRender,
+  onEvent,
   iconsColor = DEFAULT_ICONS_COLOR,
   showMainActionIcon = DEFAULT_SHOW_MAIN_ACTION_ICON,
   showLoaderIcon = DEFAULT_SHOW_LOADER_ICON,
@@ -42,14 +45,20 @@ export const AudioVisualizerUI = ({
   const play = useCallback(() => {
     controller.current.play();
     setPlaying(true);
+    emitter.emit(AudioVisualizerEvents.playing);
   }, [controller, setPlaying]);
   const pause = useCallback(() => {
     controller.current.pause();
     setPlaying(false);
+    emitter.emit(AudioVisualizerEvents.paused);
   }, [controller, setPlaying]);
   const onMouseEnter = useCallback(() => setHovering(true), [setHovering]);
   const onMouseLeave = useCallback(() => setHovering(false), [setHovering]);
   
+  useEffect(() => {
+    emitter.subscribe(onEvent);
+  }, [onEvent]);
+
   useEffect(() => {
     const visualizerController = controller.current;
     
