@@ -6,13 +6,13 @@ const WIDTH = 12;
 const CURVE_HEIGHT = 6;
 const DEFAULT_COLOR = 'white';
 
-interface BarProps {
+interface RoundBarProps {
   position: [number, number];
   height: number;
   color?: Color;
 }
 
-export const Bar = ({ position: [x, y], height, color }: BarProps) => {
+export const RoundBar = ({ position: [x, y], height, color }: RoundBarProps) => {
   const shape = useMemo(() => {
     const shape = new THREE.Shape();
     const xWidth = x + WIDTH;
