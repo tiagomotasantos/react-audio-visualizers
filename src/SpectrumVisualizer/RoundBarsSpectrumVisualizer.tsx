@@ -1,7 +1,13 @@
 import { ReactNode, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
-import { SpectrumVisualizerProps } from './SpectrumVisualizer';
+import {
+  HIGH_FREQUENCY_LIMIT,
+  LOW_FREQUENCY_LIMIT,
+  MAX_DECIBEL,
+  MIN_DECIBEL,
+  SpectrumVisualizerProps
+} from './SpectrumVisualizer';
 import { RoundBar } from './RoundBar';
 
 const DEFAULT_MARGIN = 15;
@@ -12,13 +18,6 @@ const DEFAULT_NUM_BARS = 63;
 // in world units
 const REFERENCE_SPECTRUM_WIDTH = 1265;
 const MIN_BAR_HEIGHT = 10;
-
-const MIN_DECIBEL = 0;
-const MAX_DECIBEL = 255;
-
-// frequency interval to show in Hz
-const LOW_FREQUENCY_LIMIT = 20;
-const HIGH_FREQUENCY_LIMIT = 20000;
 
 interface RoundBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'color' | 'lowFrequency' | 'highFrequency'> {
   numBars?: number;

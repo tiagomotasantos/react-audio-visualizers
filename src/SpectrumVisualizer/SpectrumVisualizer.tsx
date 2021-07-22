@@ -1,5 +1,13 @@
 import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
 import { RoundBarsSpectrumVisualizer } from './RoundBarsSpectrumVisualizer';
+import { SquaredBarsSpectrumVisualizer } from './SquaredBarsSpectrumVisualizer';
+
+export const MIN_DECIBEL = 0;
+export const MAX_DECIBEL = 255;
+
+// frequency interval to show in Hz
+export const LOW_FREQUENCY_LIMIT = 20;
+export const HIGH_FREQUENCY_LIMIT = 20000;
 
 export enum SpectrumVisualizerTheme {
   roundBars = 'ROUND_BARS',
@@ -26,6 +34,12 @@ const SpectrumVisualizerThemeComponent = ({
   switch(theme) {
     case SpectrumVisualizerTheme.roundBars:
       return <RoundBarsSpectrumVisualizer
+        lowFrequency={lowFrequency}
+        highFrequency={highFrequency}
+        color={color}
+      />;
+    case SpectrumVisualizerTheme.squaredBars:
+      return <SquaredBarsSpectrumVisualizer
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         color={color}
