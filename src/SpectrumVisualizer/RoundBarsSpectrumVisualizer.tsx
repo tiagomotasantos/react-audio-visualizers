@@ -33,7 +33,7 @@ export const RoundBarsSpectrumVisualizer = ({
   highFrequency,
 }: RoundBarsSpectrumVisualizerProps) => {
   const { audioContext, analyser } = useAudioVisualizerContext();
-  const { viewport: {width: viewportWidth, height: viewportHeight} } = useThree();
+  const { viewport: { width: viewportWidth, height: viewportHeight } } = useThree();
   const spectrumWidth = viewportWidth - margin;
   const halfSpectrumWidth = spectrumWidth / 2;
   const halfSpectrumHeight = viewportHeight / 2;
