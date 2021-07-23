@@ -1,36 +1,41 @@
 import { Color } from 'packages/react-audio-visualizers-core/src';
 import { useMemo } from 'react';
 import * as THREE from 'three';
+import { DEFAULT_COLOR } from './SpectrumVisualizer';
 
-const WIDTH = 12;
 const CURVE_HEIGHT = 6;
-const DEFAULT_COLOR = 'white';
 
 interface RoundBarProps {
   position: [number, number];
   height: number;
+  width: number;
   color?: Color;
 }
 
-export const RoundBar = ({ position: [x, y], height, color }: RoundBarProps) => {
+export const RoundBar = ({
+  position: [x, y],
+  height,
+  width,
+  color = DEFAULT_COLOR,
+}: RoundBarProps) => {
   const shape = useMemo(() => {
     const shape = new THREE.Shape();
-    const xWidth = x + WIDTH;
+    const xWidth = x + width;
     const yHeight = y + height;
 
     shape.currentPoint = new THREE.Vector2(x, y);
     shape.lineTo(x, yHeight);
-    shape.bezierCurveTo(x, yHeight, x + WIDTH / 2, yHeight + CURVE_HEIGHT, xWidth, yHeight);
+    shape.bezierCurveTo(x, yHeight, x + width / 2, yHeight + CURVE_HEIGHT, xWidth, yHeight);
     shape.lineTo(xWidth, y);
-    shape.bezierCurveTo(xWidth, y, x + WIDTH / 2, y - CURVE_HEIGHT, x, y);
+    shape.bezierCurveTo(xWidth, y, x + width / 2, y - CURVE_HEIGHT, x, y);
 
     return shape;
-  }, [x, y, height]);
+  }, [x, y, width, height]);
 
   return (
     <mesh>
       <shapeBufferGeometry args={[shape]} />
-      <meshBasicMaterial color={color || DEFAULT_COLOR} />
+      <meshBasicMaterial color={color} />
     </mesh>
   );
 };
