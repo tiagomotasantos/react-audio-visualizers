@@ -6,8 +6,6 @@ import {
   DEFAULT_MARGIN_HEIGHT_TOP,
   DEFAULT_MARGIN_WIDTH,
   DEFAULT_NUM_BARS,
-  HIGH_FREQUENCY_LIMIT, 
-  LOW_FREQUENCY_LIMIT,
   MAX_DECIBEL,
   MIN_BAR_HEIGHT,
   MIN_DECIBEL,
@@ -35,17 +33,16 @@ export const SquaredBarsSpectrumVisualizer = ({
   const halfSpectrumHeight = viewportHeight / 2;
   const nBars = numBars || viewportWidth * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH;
   const spacing = spectrumWidth / nBars;
+  const dataArray = new Uint8Array(analyser ? analyser.frequencyBinCount : 0);
+  const interval = AudioVisualizerUtils.getFrequencyInterval(lowFrequency, highFrequency, nBars, dataArray,  audioContext?.sampleRate);
   const [bars, setBars] = useState<ReactNode[]>([]);
 
   useFrame(() => {
     if (analyser && audioContext) {
-      const dataArray = new Uint8Array(analyser.frequencyBinCount);
-      const bars = [];
-
       analyser.getByteFrequencyData(dataArray);
       
-      const filteredData = AudioVisualizerUtils.filterFrequencies(lowFrequency || LOW_FREQUENCY_LIMIT, highFrequency || HIGH_FREQUENCY_LIMIT, dataArray, audioContext.sampleRate);
-      const interval = Math.floor(filteredData.length / nBars);
+      const bars = [];
+      const filteredData = AudioVisualizerUtils.filterFrequencies(lowFrequency, highFrequency, dataArray, audioContext.sampleRate);
 
       for (let i = 0; i < nBars; i++) {
         const height = AudioVisualizerUtils.map(filteredData[i * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, viewportHeight - DEFAULT_MARGIN_HEIGHT_TOP) || MIN_BAR_HEIGHT;
