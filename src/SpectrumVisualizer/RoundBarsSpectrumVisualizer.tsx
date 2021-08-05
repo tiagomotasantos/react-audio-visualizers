@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizerUtils, Color, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
 import {
   DEFAULT_MARGIN_HEIGHT_BOTTOM,
   DEFAULT_MARGIN_HEIGHT_TOP,
@@ -16,9 +16,10 @@ import { RoundBar } from './RoundBar';
 
 const DEFAULT_BAR_WIDTH = 12;
 
-interface RoundBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'color' | 'lowFrequency' | 'highFrequency'> {
+interface RoundBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'lowFrequency' | 'highFrequency'> {
   numBars?: number;
   margin?: number;
+  color?: Color;
 }
 
 export const RoundBarsSpectrumVisualizer = ({
