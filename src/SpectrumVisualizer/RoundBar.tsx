@@ -1,7 +1,6 @@
 import { Color } from 'packages/react-audio-visualizers-core/src';
 import { useMemo } from 'react';
 import { Shape, Vector2 } from 'three';
-import { DEFAULT_COLOR } from './SpectrumVisualizer';
 
 const CURVE_HEIGHT = 6;
 
@@ -16,7 +15,7 @@ export const RoundBar = ({
   position: [x, y],
   height,
   width,
-  color = DEFAULT_COLOR,
+  color,
 }: RoundBarProps) => {
   const shape = useMemo(() => {
     const shape = new Shape();
