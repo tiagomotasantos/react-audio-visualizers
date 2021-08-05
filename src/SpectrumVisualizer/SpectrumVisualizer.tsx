@@ -26,7 +26,7 @@ export enum SpectrumVisualizerTheme {
 
 export interface SpectrumVisualizerProps extends AudioVisualizerCommonProps {
   theme: SpectrumVisualizerTheme;
-  color?: Color;
+  colors?: Color[];
   lowFrequency?: number;
   highFrequency?: number;
 }
@@ -35,20 +35,20 @@ const SpectrumVisualizerThemeComponent = ({
   theme,
   lowFrequency,
   highFrequency,
-  color,
+  colors = [DEFAULT_COLOR],
 }: SpectrumVisualizerProps) => {
   switch(theme) {
     case SpectrumVisualizerTheme.roundBars:
       return <RoundBarsSpectrumVisualizer
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
-        color={color}
+        color={colors[0]}
       />;
     case SpectrumVisualizerTheme.squaredBars:
       return <SquaredBarsSpectrumVisualizer
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
-        color={color}
+        colors={colors}
       />;
     default:
       return null;
