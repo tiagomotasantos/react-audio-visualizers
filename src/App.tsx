@@ -19,7 +19,7 @@ function App() {
         audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
         volume={1}
         theme={SpectrumVisualizerTheme.squaredBars}
-        color={0xff9670}
+        colors={['#ff9670', '#b2694e']}
         iconsColor="#ff9670"
         backgroundColor="black"
         showMainActionIcon
