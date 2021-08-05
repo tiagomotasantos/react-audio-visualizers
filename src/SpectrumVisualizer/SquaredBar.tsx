@@ -1,29 +1,30 @@
 import { Color } from 'packages/react-audio-visualizers-core/src';
-import { useMemo } from 'react';
-import { useEffect, useRef } from 'react';
-import { Mesh } from 'three';
+import { useMemo, useEffect, useRef } from 'react';
+import { ColorUtils } from 'shared/ColorUtils';
+import { Mesh, } from 'three';
 import { DEFAULT_COLOR } from './SpectrumVisualizer';
 
 interface SquaredBarProps {
   position: [number, number];
   height: number;
   width: number;
-  color?: Color;
+  colors?: Color[];
 }
 
 export const SquaredBar = ({
   position: [x, y],
   height,
   width,
-  color = DEFAULT_COLOR,
+  colors = [DEFAULT_COLOR],
 }: SquaredBarProps) => {
   const planeRef = useRef<Mesh>();
+  const gradient = useMemo(() => ColorUtils.getColorGradientTexture(colors), [colors]);
   const mesh = useMemo(() => (
     <mesh ref={planeRef}>
       <planeBufferGeometry />
-      <meshBasicMaterial color={color} />
+      <meshBasicMaterial map={gradient} />
     </mesh>
-  ), [color, planeRef]);
+  ), [gradient, planeRef]);
 
   useEffect(() => {
     planeRef.current?.position.setX(x);
