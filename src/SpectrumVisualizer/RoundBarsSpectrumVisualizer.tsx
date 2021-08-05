@@ -18,20 +18,18 @@ const DEFAULT_BAR_WIDTH = 12;
 
 interface RoundBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'lowFrequency' | 'highFrequency'> {
   numBars?: number;
-  margin?: number;
   color?: Color;
 }
 
 export const RoundBarsSpectrumVisualizer = ({
   numBars,
-  margin = DEFAULT_MARGIN_WIDTH,
   color,
   lowFrequency,
   highFrequency,
 }: RoundBarsSpectrumVisualizerProps) => {
   const { audioContext, analyser } = useAudioVisualizerContext();
   const { viewport: { width: viewportWidth, height: viewportHeight } } = useThree();
-  const spectrumWidth = viewportWidth - margin;
+  const spectrumWidth = viewportWidth - DEFAULT_MARGIN_WIDTH;
   const halfSpectrumWidth = spectrumWidth / 2;
   const halfSpectrumHeight = viewportHeight / 2;
   const nBars = numBars || viewportWidth * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH;
