@@ -18,7 +18,7 @@ function App() {
       <SpectrumVisualizer
         audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
         volume={1}
-        theme={SpectrumVisualizerTheme.squaredBars}
+        theme={SpectrumVisualizerTheme.line}
         colors={['#ff9670', '#b2694e']}
         iconsColor="#ff9670"
         backgroundColor="black"
