@@ -1,4 +1,5 @@
 import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
+import { LineSpectrumVisualizer } from './LineSpectrumVisualizer';
 import { RoundBarsSpectrumVisualizer } from './RoundBarsSpectrumVisualizer';
 import { SquaredBarsSpectrumVisualizer } from './SquaredBarsSpectrumVisualizer';
 
@@ -49,6 +50,12 @@ const SpectrumVisualizerThemeComponent = ({
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         colors={colors}
+      />;
+    case SpectrumVisualizerTheme.line:
+      return <LineSpectrumVisualizer
+        lowFrequency={lowFrequency}
+        highFrequency={highFrequency}
+        color={colors[0]}
       />;
     default:
       return null;
