@@ -1,5 +1,6 @@
 import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
 import { LineSpectrumVisualizer } from './LineSpectrumVisualizer';
+import { RadialSquaredBarsSpectrumVisualizer } from './RadialSquaredBarsSpectrumVisualizer';
 import { RoundBarsSpectrumVisualizer } from './RoundBarsSpectrumVisualizer';
 import { SquaredBarsSpectrumVisualizer } from './SquaredBarsSpectrumVisualizer';
 
@@ -8,6 +9,7 @@ export const DEFAULT_MARGIN_WIDTH = 15;
 export const DEFAULT_MARGIN_HEIGHT_TOP = 10;
 export const DEFAULT_MARGIN_HEIGHT_BOTTOM = 5;
 export const DEFAULT_NUM_BARS = 64;
+export const DEFAULT_STARTING_ANGLE = Math.PI;
 
 export const MIN_DECIBEL = 0;
 export const MAX_DECIBEL = 255;
@@ -20,7 +22,6 @@ export enum SpectrumVisualizerTheme {
   roundBars = 'ROUND_BARS',
   squaredBars = 'SQUARED_BARS',
   line = 'LINE',
-  radialRoundBars = 'RADIAL_ROUND_BARS',
   radialSquaredBars = 'RADIAL_SQUARED_BARS',
   radialLine = 'RADIAL_LINE',
 }
@@ -56,6 +57,12 @@ const SpectrumVisualizerThemeComponent = ({
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         color={colors[0]}
+      />;
+    case SpectrumVisualizerTheme.radialSquaredBars:
+      return <RadialSquaredBarsSpectrumVisualizer
+        lowFrequency={lowFrequency}
+        highFrequency={highFrequency}
+        colors={colors}
       />;
     default:
       return null;
