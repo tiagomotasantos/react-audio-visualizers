@@ -1,13 +1,14 @@
 import { Color } from 'packages/react-audio-visualizers-core/src';
 import { useMemo, useEffect, useRef } from 'react';
+import { Mesh, Vector3, } from 'three';
 import { ColorUtils } from 'shared/ColorUtils';
-import { Mesh, } from 'three';
 import { DEFAULT_COLOR } from './SpectrumVisualizer';
 
 interface SquaredBarProps {
   position: [number, number];
   height: number;
   width: number;
+  rotation?: number;
   colors?: Color[];
 }
 
@@ -15,8 +16,10 @@ export const SquaredBar = ({
   position: [x, y],
   height,
   width,
+  rotation = 0,
   colors = [DEFAULT_COLOR],
 }: SquaredBarProps) => {
+  const zAxis = useMemo(() => new Vector3(0, 0, 1), []);
   const planeRef = useRef<Mesh>();
   const gradient = useMemo(() => ColorUtils.getColorGradientTexture(colors), [colors]);
   const mesh = useMemo(() => (
@@ -40,6 +43,10 @@ export const SquaredBar = ({
     meshPosition.setX(3, width);
     meshPosition.needsUpdate = true;
   }, [height, width]);
+
+  useEffect(() => {
+    planeRef.current?.setRotationFromAxisAngle(zAxis, rotation);
+  }, [zAxis, rotation]);
 
   return mesh;
 };
