@@ -16,8 +16,9 @@ import { RoundBar } from './RoundBar';
 
 const DEFAULT_BAR_WIDTH = 12;
 
-interface RoundBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'lowFrequency' | 'highFrequency'> {
-  numBars?: number;
+interface RoundBarsSpectrumVisualizerProps extends Pick<
+  SpectrumVisualizerProps, 'lowFrequency' | 'highFrequency' | 'numBars'
+> {
   color?: Color;
 }
 

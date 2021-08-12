@@ -16,9 +16,9 @@ import { SquaredBar } from './SquaredBar';
 
 const DEFAULT_BAR_WIDTH = 18;
 
-interface SquaredBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'colors' | 'lowFrequency' | 'highFrequency'> {
-  numBars?: number;
-}
+interface SquaredBarsSpectrumVisualizerProps extends Pick<
+  SpectrumVisualizerProps, 'numBars' | 'colors' | 'lowFrequency' | 'highFrequency'
+> {}
 
 export const SquaredBarsSpectrumVisualizer = ({
   numBars,

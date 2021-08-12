@@ -14,13 +14,14 @@ import {
   SpectrumVisualizerProps
 } from './SpectrumVisualizer';
 
-interface LineSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'lowFrequency' | 'highFrequency'> {
-  numPoints?: number;
+interface LineSpectrumVisualizerProps extends Pick<
+  SpectrumVisualizerProps, 'lowFrequency' | 'highFrequency' | 'numBars'
+> {
   color?: Color;
 }
 
 export const LineSpectrumVisualizer = ({
-  numPoints,
+  numBars,
   color,
   lowFrequency,
   highFrequency,
@@ -30,7 +31,7 @@ export const LineSpectrumVisualizer = ({
   const spectrumWidth = viewportWidth - DEFAULT_MARGIN_WIDTH;
   const halfSpectrumWidth = spectrumWidth / 2;
   const halfSpectrumHeight = viewportHeight / 2;
-  const nPoints = numPoints || Math.round(viewportWidth * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH);
+  const nPoints = numBars || Math.round(viewportWidth * DEFAULT_NUM_BARS / REFERENCE_SPECTRUM_WIDTH);
   const spacing = spectrumWidth / nPoints;
   const dataArray = new Uint8Array(analyser ? analyser.frequencyBinCount : 0);
   const interval = AudioVisualizerUtils.getFrequencyInterval(lowFrequency, highFrequency, nPoints, dataArray,  audioContext?.sampleRate);

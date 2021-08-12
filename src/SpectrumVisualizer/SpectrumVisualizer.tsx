@@ -31,38 +31,56 @@ export interface SpectrumVisualizerProps extends AudioVisualizerCommonProps {
   colors?: Color[];
   lowFrequency?: number;
   highFrequency?: number;
+  numBars?: number
+  radius?: number;
+  barWidth?: number;
+  startingAngle?: number;
+  mirror?: boolean;
 }
 
 const SpectrumVisualizerThemeComponent = ({
   theme,
   lowFrequency,
   highFrequency,
+  numBars,
+  radius,
+  barWidth,
+  startingAngle,
+  mirror,
   colors = [DEFAULT_COLOR],
 }: SpectrumVisualizerProps) => {
   switch(theme) {
     case SpectrumVisualizerTheme.roundBars:
       return <RoundBarsSpectrumVisualizer
+        numBars={numBars}
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         color={colors[0]}
       />;
     case SpectrumVisualizerTheme.squaredBars:
       return <SquaredBarsSpectrumVisualizer
+        numBars={numBars}
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         colors={colors}
       />;
     case SpectrumVisualizerTheme.line:
       return <LineSpectrumVisualizer
+        numBars={numBars}
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         color={colors[0]}
       />;
     case SpectrumVisualizerTheme.radialSquaredBars:
       return <RadialSquaredBarsSpectrumVisualizer
+        numBars={numBars}
         lowFrequency={lowFrequency}
         highFrequency={highFrequency}
         colors={colors}
+        radius={radius}
+        barWidth={barWidth}
+        startingAngle={startingAngle}
+        mirror={mirror}
       />;
     default:
       return null;
