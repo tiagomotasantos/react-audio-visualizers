@@ -15,13 +15,10 @@ import { SquaredBar } from './SquaredBar';
 const DEFAULT_BAR_WIDTH = 14;
 const DEFAULT_NUM_BARS = 75;
 
-interface RadialSquaredBarsSpectrumVisualizerProps extends Pick<SpectrumVisualizerProps, 'colors' | 'lowFrequency' | 'highFrequency'> {
-  numBars?: number;
-  radius?: number;
-  barWidth?: number;
-  startingAngle?: number;
-  mirror?: boolean;
-}
+interface RadialSquaredBarsSpectrumVisualizerProps extends Pick<
+  SpectrumVisualizerProps,
+  'numBars' | 'radius' | 'barWidth' | 'startingAngle' | 'colors' | 'lowFrequency' | 'highFrequency' | 'mirror'
+> {}
 
 export const RadialSquaredBarsSpectrumVisualizer = ({
   numBars = DEFAULT_NUM_BARS,
@@ -35,15 +32,14 @@ export const RadialSquaredBarsSpectrumVisualizer = ({
 }: RadialSquaredBarsSpectrumVisualizerProps) => {
   const { audioContext, analyser } = useAudioVisualizerContext();
   const { viewport: { width: viewportWidth, height: viewportHeight } } = useThree();
-  const nBars = numBars;
-  const halfBars = nBars / 2;
+  const halfBars = Math.round(numBars / 2);
   const barWidth = customBarWidth || Math.round(viewportWidth * DEFAULT_BAR_WIDTH / REFERENCE_SPECTRUM_WIDTH);
   const dataArray = new Uint8Array(analyser ? analyser.frequencyBinCount : 0);
-  const angleInterval = 2 * Math.PI / nBars;
+  const angleInterval = 2 * Math.PI / numBars;
   const r = radius || Math.sqrt(Math.pow(viewportWidth, 2) + Math.pow(viewportHeight, 2)) / 8;
-  const interval = AudioVisualizerUtils.getFrequencyInterval(lowFrequency, highFrequency, mirror ? halfBars : nBars, dataArray, audioContext?.sampleRate);
+  const interval = AudioVisualizerUtils.getFrequencyInterval(lowFrequency, highFrequency, mirror ? halfBars : numBars, dataArray, audioContext?.sampleRate);
   const [bars, setBars] = useState<ReactNode[]>([]);
-  const positions = Array.from(Array(nBars), (_, i) => {
+  const positions = Array.from(Array(numBars), (_, i) => {
     const angle = i * angleInterval + startingAngle;
     const x = r * Math.cos(angle);
     const y = r * Math.sin(angle);
@@ -62,7 +58,7 @@ export const RadialSquaredBarsSpectrumVisualizer = ({
       const bars = [];
       const filteredData = AudioVisualizerUtils.filterFrequencies(lowFrequency, highFrequency, dataArray, audioContext.sampleRate);
 
-      for (let i = 0; i < nBars; i++) {
+      for (let i = 0; i < numBars; i++) {
         const height = AudioVisualizerUtils.map(filteredData[i % maxIndex * interval], MIN_DECIBEL, MAX_DECIBEL, MIN_BAR_HEIGHT, maxBarHeight - DEFAULT_MARGIN_HEIGHT_TOP) || MIN_BAR_HEIGHT;
         const { x, y, angle } = positions[i];
 
