@@ -1,5 +1,6 @@
 import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
 import { LineSpectrumVisualizer } from './LineSpectrumVisualizer';
+import { RadialLineSpectrumVisualizer } from './RadialLineSpectrumVisualizer';
 import { RadialSquaredBarsSpectrumVisualizer } from './RadialSquaredBarsSpectrumVisualizer';
 import { RoundBarsSpectrumVisualizer } from './RoundBarsSpectrumVisualizer';
 import { SquaredBarsSpectrumVisualizer } from './SquaredBarsSpectrumVisualizer';
@@ -79,6 +80,16 @@ const SpectrumVisualizerThemeComponent = ({
         colors={colors}
         radius={radius}
         barWidth={barWidth}
+        startingAngle={startingAngle}
+        mirror={mirror}
+      />;
+    case SpectrumVisualizerTheme.radialLine:
+      return <RadialLineSpectrumVisualizer
+        numBars={numBars}
+        lowFrequency={lowFrequency}
+        highFrequency={highFrequency}
+        color={colors[0]}
+        radius={radius}
         startingAngle={startingAngle}
         mirror={mirror}
       />;
