@@ -1,4 +1,5 @@
 import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
+import { SquaredBarsWaveformVisualizer } from './SquareBarsWaveformVisualizer';
 
 export const DEFAULT_COLOR = 'white';
 export const DEFAULT_MARGIN_WIDTH = 15;
@@ -30,7 +31,7 @@ const WaveformVisualizerThemeComponent = ({
 }: WaveformVisualizerProps) => {
   switch(theme) {
     case WaveformVisualizerTheme.squaredBars:
-      return null;
+      return <SquaredBarsWaveformVisualizer colors={colors} />;
     default:
       return null;
   }
