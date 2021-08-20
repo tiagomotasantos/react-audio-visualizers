@@ -4,7 +4,7 @@ import { Mesh, Vector3, } from 'three';
 import { ColorUtils } from 'shared/ColorUtils';
 import { DEFAULT_COLOR } from './SpectrumVisualizer';
 
-interface SquaredBarProps {
+export interface SquaredBarProps {
   position: [number, number];
   height: number;
   width: number;
