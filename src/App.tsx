@@ -1,4 +1,4 @@
-import { SpectrumVisualizer, SpectrumVisualizerTheme } from 'SpectrumVisualizer';
+// import { SpectrumVisualizer, SpectrumVisualizerTheme } from 'SpectrumVisualizer';
 import { WaveformVisualizer, WaveformVisualizerTheme } from 'WaveformVisualizer';
 
 // const Box = () => {
