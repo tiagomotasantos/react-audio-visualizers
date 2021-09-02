@@ -2,22 +2,23 @@ import { useState, ReactNode } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { Clock } from 'three';
 import { AudioVisualizerStatus, AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
-import { WaveformVisualizerProps } from './WaveformVisualizer';
+import { DEFAULT_MARGIN_HEIGHT_TOP, MAX_DECIBEL, MIN_DECIBEL, OFF_SCREEN_OFFSET, WaveformVisualizerProps } from './WaveformVisualizer';
 import { SquaredBar, SquaredBarProps } from 'SpectrumVisualizer/SquaredBar';
 
-interface SquaredBarsWaveformVisualizerProps extends Omit<WaveformVisualizerProps, 'theme'>{}
+interface SquaredBarsWaveformVisualizerProps extends Pick<WaveformVisualizerProps, 'colors'> {
+  barWidth: number;
+  barMargin: number;
+  refreshRate: number;
+}
 
-const BAR_WIDTH = 10;
-const BAR_MARGIN = 2.5;
-const OFF_SCREEN_OFFSET = 20;
-const DEFAULT_MARGIN_HEIGHT_TOP = 10;
-// time in seconds to draw 
-const REFRESH_RATE = 0.025;
 const clock = new Clock();
 let barProps: SquaredBarProps[] = [];
 
 export const SquaredBarsWaveformVisualizer = ({
   colors,
+  barWidth,
+  barMargin,
+  refreshRate
 }: SquaredBarsWaveformVisualizerProps) => {
   const { audioContext, analyser, status } = useAudioVisualizerContext();
   const { viewport: { width: viewportWidth, height: viewportHeight } } = useThree();
@@ -27,13 +28,13 @@ export const SquaredBarsWaveformVisualizer = ({
   const [bars, setBars] = useState<ReactNode[]>([]);
 
   useFrame(() => {
-    if (analyser && audioContext && status === AudioVisualizerStatus.playing && clock.getElapsedTime() > REFRESH_RATE) {
+    if (analyser && audioContext && status === AudioVisualizerStatus.playing && clock.getElapsedTime() > refreshRate) {
       analyser.getByteTimeDomainData(dataArray);
-      const height = Math.max(AudioVisualizerUtils.map(Math.max(...Array.from(dataArray)), 128, 255, 0, viewportHeight - DEFAULT_MARGIN_HEIGHT_TOP), 0);
+      const height = Math.max(AudioVisualizerUtils.map(Math.max(...Array.from(dataArray)), MIN_DECIBEL, MAX_DECIBEL, 0, viewportHeight - DEFAULT_MARGIN_HEIGHT_TOP), 0);
 
       // move bars to the left
       barProps = barProps.map(({ position: [x, y], ...rest }) => ({
-        position: [x - BAR_WIDTH - BAR_MARGIN, y],
+        position: [x - barWidth - barMargin, y],
         ...rest
       }));
       
@@ -44,8 +45,8 @@ export const SquaredBarsWaveformVisualizer = ({
       barProps.push({
         height,
         colors,
-        width: BAR_WIDTH,
-        position: [halfVisualizerWidth - BAR_WIDTH, height * -0.5],
+        width: barWidth,
+        position: [halfVisualizerWidth - barWidth, height * -0.5],
       });
 
       setBars(barProps.map((bp, i) => (<SquaredBar key={i} {...bp} />)));
