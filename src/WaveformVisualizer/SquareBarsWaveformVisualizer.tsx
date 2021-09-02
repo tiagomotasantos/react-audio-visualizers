@@ -3,7 +3,7 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { Clock } from 'three';
 import { AudioVisualizerStatus, AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
 import { DEFAULT_MARGIN_HEIGHT_TOP, MAX_DECIBEL, MIN_DECIBEL, OFF_SCREEN_OFFSET, WaveformVisualizerProps } from './WaveformVisualizer';
-import { SquaredBar, SquaredBarProps } from 'SpectrumVisualizer/SquaredBar';
+import { SquaredBar, SquaredBarProps } from 'shared/components/SquaredBar';
 
 interface SquaredBarsWaveformVisualizerProps extends Pick<WaveformVisualizerProps, 'colors'> {
   barWidth: number;

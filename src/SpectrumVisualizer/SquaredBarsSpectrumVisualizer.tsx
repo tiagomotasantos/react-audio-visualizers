@@ -12,7 +12,7 @@ import {
   REFERENCE_SPECTRUM_WIDTH,
   SpectrumVisualizerProps
 } from './SpectrumVisualizer';
-import { SquaredBar } from './SquaredBar';
+import { SquaredBar } from '../shared/components/SquaredBar';
 
 const DEFAULT_BAR_WIDTH = 18;
 
