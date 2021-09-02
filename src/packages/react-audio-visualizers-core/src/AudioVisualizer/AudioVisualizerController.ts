@@ -1,4 +1,4 @@
-import { Audio } from '../types';
+import { Audio, AudioVisualizerStatus } from '../types';
 import { AudioVisualizerContext } from './AudioVisualizerProvider';
 import { AudioVisualizerEvents, emitter } from './events';
 import { AudioVisualizerLoaderFactory } from './loaders';
@@ -58,6 +58,7 @@ export class AudioVisualizerController {
     this.audioSource.buffer = this.audioBuffer;
     this.audioSource.start(0, offset);
     this.startedAt = this.audioContext.currentTime - offset;
+    this.context.setStatus(AudioVisualizerStatus.playing);
   }
 
   pause() {
@@ -69,6 +70,8 @@ export class AudioVisualizerController {
       this.audioSource.disconnect();
       this.audioSource.stop();
     }
+
+    this.context.setStatus(AudioVisualizerStatus.paused);
   }
 
   setVolume(volume: number) {
