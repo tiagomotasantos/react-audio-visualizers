@@ -3,7 +3,7 @@ import { HIGH_FREQUENCY_LIMIT, LOW_FREQUENCY_LIMIT } from '../constants';
 export class AudioVisualizerUtils {
   static map(n: number, start1: number, stop1: number, start2: number, stop2: number) {
     return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
-  } 
+  }
   
   static filterFrequencies(
     lowFrequency: number = LOW_FREQUENCY_LIMIT,
