@@ -1,7 +1,9 @@
 import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
+import { LineWaveformVisualizer } from './LineWaveformVisualizer';
 import { SquaredBarsWaveformVisualizer } from './SquareBarsWaveformVisualizer';
 
 export const DEFAULT_COLOR = 'white';
+export const DEFAULT_MARGIN_HEIGHT_BOTTOM = 2;
 export const DEFAULT_MARGIN_HEIGHT_TOP = 10;
 export const DEFAULT_BAR_WIDTH = 10;
 export const DEFAULT_BAR_MARGIN = 2.5;
@@ -43,6 +45,12 @@ const WaveformVisualizerThemeComponent = ({
         colors={colors}
         barWidth={barWidth}
         barMargin={barMargin}
+        refreshRate={refreshRate}
+      />;
+    case WaveformVisualizerTheme.line:
+      return <LineWaveformVisualizer
+        color={colors[0]}
+        pointSpacing={barWidth}
         refreshRate={refreshRate}
       />;
     default:
