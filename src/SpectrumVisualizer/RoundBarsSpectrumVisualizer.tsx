@@ -12,7 +12,7 @@ import {
   REFERENCE_SPECTRUM_WIDTH,
   SpectrumVisualizerProps
 } from './SpectrumVisualizer';
-import { RoundBar } from './RoundBar';
+import { RoundBar } from '../shared/components/RoundBar';
 
 const DEFAULT_BAR_WIDTH = 12;
 
