@@ -22,8 +22,7 @@ export const SquaredBarsWaveformVisualizer = ({
 }: SquaredBarsWaveformVisualizerProps) => {
   const { audioContext, analyser, status } = useAudioVisualizerContext();
   const { viewport: { width: viewportWidth, height: viewportHeight } } = useThree();
-  const visualizerWidth = viewportWidth - 5; // margin
-  const halfVisualizerWidth = visualizerWidth / 2;
+  const halfVisualizerWidth = viewportWidth / 2;
   const dataArray = new Uint8Array(analyser ? analyser.frequencyBinCount : 0);
   const [bars, setBars] = useState<ReactNode[]>([]);
 
