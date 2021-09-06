@@ -1,6 +1,6 @@
 import { Color } from 'packages/react-audio-visualizers-core/src';
-import { useMemo, useEffect, useRef } from 'react';
-import { Mesh, Vector3, } from 'three';
+import { createRef, useMemo, useEffect, MutableRefObject } from 'react';
+import { BufferGeometry, Mesh, Vector3, } from 'three';
 import { ColorUtils } from 'shared/ColorUtils';
 import { DEFAULT_COLOR } from '../../SpectrumVisualizer/SpectrumVisualizer';
 
@@ -10,6 +10,7 @@ export interface SquaredBarProps {
   width: number;
   rotation?: number;
   colors?: Color[];
+  meshRef?: MutableRefObject<Mesh<BufferGeometry> | null>;
 }
 
 export const SquaredBar = ({
@@ -17,10 +18,11 @@ export const SquaredBar = ({
   height,
   width,
   rotation = 0,
+  meshRef,
   colors = [DEFAULT_COLOR],
 }: SquaredBarProps) => {
   const zAxis = useMemo(() => new Vector3(0, 0, 1), []);
-  const planeRef = useRef<Mesh>();
+  const planeRef = meshRef || createRef<Mesh>();
   const gradient = useMemo(() => ColorUtils.getColorGradientTexture(colors), [colors]);
   const mesh = useMemo(() => (
     <mesh ref={planeRef}>
