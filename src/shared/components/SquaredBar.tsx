@@ -22,7 +22,7 @@ export const SquaredBar = ({
   colors = [DEFAULT_COLOR],
 }: SquaredBarProps) => {
   const zAxis = useMemo(() => new Vector3(0, 0, 1), []);
-  const planeRef = meshRef || createRef<Mesh>();
+  const planeRef = useMemo(() => meshRef || createRef<Mesh>(), [meshRef]);
   const gradient = useMemo(() => ColorUtils.getColorGradientTexture(colors), [colors]);
   const mesh = useMemo(() => (
     <mesh ref={planeRef}>
@@ -34,7 +34,7 @@ export const SquaredBar = ({
   useEffect(() => {
     planeRef.current?.position.setX(x);
     planeRef.current?.position.setY(y);
-  }, [x, y]);
+  }, [planeRef, x, y]);
 
   useEffect(() => {
     const meshPosition = planeRef.current?.geometry.attributes.position!;
@@ -44,11 +44,11 @@ export const SquaredBar = ({
     meshPosition.setX(1, width);
     meshPosition.setX(3, width);
     meshPosition.needsUpdate = true;
-  }, [height, width]);
+  }, [planeRef, height, width]);
 
   useEffect(() => {
     planeRef.current?.setRotationFromAxisAngle(zAxis, rotation);
-  }, [zAxis, rotation]);
+  }, [planeRef, zAxis, rotation]);
 
   return mesh;
 };
