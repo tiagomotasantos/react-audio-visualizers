@@ -20,18 +20,19 @@ function App() {
         audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
         volume={1}
         theme={SpectrumVisualizerTheme.radialSquaredBars}
-        colors={['#ff9670', '#b2694e']}
-        iconsColor="#ff9670"
-        backgroundColor="black"
+        colors={['#009688', '#26a69a']}
+        iconsColor="#26a69a"
+        backgroundColor="white"
         showMainActionIcon
         showLoaderIcon
+        highFrequency={8000}
       /> */}
       <WaveformVisualizer
         audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
         volume={1}
         theme={WaveformVisualizerTheme.squaredBars}
-        colors={['#ff9670', '#b2694e']}
-        iconsColor="#ff9670"
+        colors={['#26a69a', '#004d40']}
+        iconsColor="#26a69a"
         backgroundColor="black"
         showMainActionIcon
         showLoaderIcon
