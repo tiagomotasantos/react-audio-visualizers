@@ -30,10 +30,10 @@ function App() {
       <WaveformVisualizer
         audio="https://media1.vocaroo.com/mp3/13HVOqUk0kGc"
         volume={1}
-        theme={WaveformVisualizerTheme.squaredBars}
-        colors={['#26a69a', '#004d40']}
+        theme={WaveformVisualizerTheme.line}
+        colors={['#009688', '#26a69a']}
         iconsColor="#26a69a"
-        backgroundColor="black"
+        backgroundColor="white"
         showMainActionIcon
         showLoaderIcon
       />
