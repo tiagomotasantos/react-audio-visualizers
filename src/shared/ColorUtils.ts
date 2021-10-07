@@ -1,5 +1,5 @@
 import { CanvasTexture, Texture } from 'three';
-import { Color } from 'packages/react-audio-visualizers-core/src';
+import { Color } from 'react-audio-visualizers-core';
 
 export class ColorUtils {
   static getColorGradientTexture(colors: Color[]): Texture {

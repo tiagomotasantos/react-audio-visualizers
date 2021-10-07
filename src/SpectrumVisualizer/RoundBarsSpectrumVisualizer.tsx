@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
-import { AudioVisualizerUtils, Color, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizerUtils, Color, useAudioVisualizerContext } from 'react-audio-visualizers-core';
 import {
   DEFAULT_MARGIN_HEIGHT_BOTTOM,
   DEFAULT_MARGIN_HEIGHT_TOP,

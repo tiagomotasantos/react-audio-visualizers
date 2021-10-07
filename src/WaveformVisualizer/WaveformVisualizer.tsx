@@ -1,4 +1,4 @@
-import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizer, AudioVisualizerCommonProps, Color } from 'react-audio-visualizers-core';
 import { LineWaveformVisualizer } from './LineWaveformVisualizer';
 import { SquaredBarsWaveformVisualizer } from './SquareBarsWaveformVisualizer';
 

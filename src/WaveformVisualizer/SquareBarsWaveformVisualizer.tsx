@@ -1,7 +1,7 @@
 import { useMemo, createRef } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { Clock, Mesh } from 'three';
-import { AudioVisualizerStatus, AudioVisualizerUtils, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizerStatus, AudioVisualizerUtils, useAudioVisualizerContext } from 'react-audio-visualizers-core';
 import { DEFAULT_MARGIN_HEIGHT_TOP, MAX_DECIBEL, MIN_BAR_HEIGHT, MIN_DECIBEL, WaveformVisualizerProps } from './WaveformVisualizer';
 import { SquaredBar } from 'shared/components/SquaredBar';
 

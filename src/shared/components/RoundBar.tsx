@@ -1,4 +1,4 @@
-import { Color } from 'packages/react-audio-visualizers-core/src';
+import { Color } from 'react-audio-visualizers-core';
 import { useMemo } from 'react';
 import { Shape, Vector2 } from 'three';
 

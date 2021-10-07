@@ -1,4 +1,4 @@
-import { Color } from 'packages/react-audio-visualizers-core/src';
+import { Color } from 'react-audio-visualizers-core';
 import { createRef, useMemo, useEffect, MutableRefObject } from 'react';
 import { BufferGeometry, Mesh, Vector3, } from 'three';
 import { ColorUtils } from 'shared/ColorUtils';

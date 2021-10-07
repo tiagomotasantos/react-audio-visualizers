@@ -1,7 +1,7 @@
 import { useMemo, useRef, useEffect } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { BufferGeometry, Vector2 } from 'three';
-import { AudioVisualizerUtils, useAudioVisualizerContext, Color } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizerUtils, useAudioVisualizerContext, Color } from 'react-audio-visualizers-core';
 import {
   DEFAULT_MARGIN_HEIGHT_TOP,
   DEFAULT_STARTING_ANGLE,

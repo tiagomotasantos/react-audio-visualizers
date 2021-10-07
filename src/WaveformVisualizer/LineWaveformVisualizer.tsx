@@ -1,7 +1,7 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { Clock, BufferGeometry, Vector2 } from 'three';
-import { AudioVisualizerStatus, AudioVisualizerUtils, Color, useAudioVisualizerContext } from 'packages/react-audio-visualizers-core/src';
+import { AudioVisualizerStatus, AudioVisualizerUtils, Color, useAudioVisualizerContext } from 'react-audio-visualizers-core';
 import { DEFAULT_MARGIN_HEIGHT_BOTTOM, DEFAULT_MARGIN_HEIGHT_TOP, MAX_DECIBEL, MIN_DECIBEL } from './WaveformVisualizer';
 
 interface LineWaveformVisualizerProps {
