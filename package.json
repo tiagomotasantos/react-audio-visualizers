@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "@react-three/fiber": "^7.0.1",
-    "react-audio-visualizers-core": "file:../react-audio-visualizers-core",
+    "react-audio-visualizers-core": "^0.1.2",
     "three": "^0.129.0",
     "typescript": "^4.3.4"
   },
