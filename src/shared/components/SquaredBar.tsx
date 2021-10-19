@@ -1,7 +1,7 @@
 import { Color } from 'react-audio-visualizers-core';
 import { createRef, useMemo, useEffect, MutableRefObject } from 'react';
 import { BufferGeometry, Mesh, Vector3, } from 'three';
-import { ColorUtils } from 'shared/ColorUtils';
+import { ColorUtils } from '../ColorUtils';
 import { DEFAULT_COLOR } from '../../SpectrumVisualizer/SpectrumVisualizer';
 
 export interface SquaredBarProps {

@@ -38,6 +38,6 @@
     "node_modules"
   ],
   "files": [
-    "./src/index.tsx"
+    "src/index.ts"
   ]
 }
