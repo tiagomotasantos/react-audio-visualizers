@@ -51,7 +51,7 @@ Take a look at some [demos](https://react-audio-visualizers.com/demos) to see wh
 
 ## Documentation
 
-Check out our [documentation website](https://react-audio-visualizers.com/docs).
+Check out the [documentation website](https://react-audio-visualizers.com/docs).
 
 ## License
 
