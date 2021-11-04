@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+<h1 align="center">React Audio Visualizers</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+A library of audio visualizer components for [React](https://facebook.github.io/react/) built with [ThreeJS](https://threejs.org/), through [react-three-fiber](https://github.com/pmndrs/react-three-fiber), and the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
 
-In the project directory, you can run:
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![npm latest package](https://img.shields.io/npm/v/react-audio-visualizers-core/latest.svg)](https://www.npmjs.com/package/react-audio-visualizers)
 
-### `npm start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+React-audio-visualizers is available as an [npm package](https://www.npmjs.com/package/react-audio-visualizers).
 
-### `npm test`
+```sh
+npm install react-audio-visualizers
+#or
+yarn add react-audio-visualizers
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+Here is an example of how to use a visualizer from react-audio-visualizers:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { SpectrumVisualizer, SpectrumVisualizerTheme } from 'react-audio-visualizers';
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+function App() {
+  return (
+    <SpectrumVisualizer
+        audio="https://your.domain.com/yourAudioFile.mp3"
+        theme={SpectrumVisualizerTheme.radialSquaredBars}
+        colors={['#009688', '#26a69a']}
+        iconsColor="#26a69a"
+        backgroundColor="white"
+        showMainActionIcon
+        showLoaderIcon
+        highFrequency={8000}
+    />
+  );
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ReactDOM.render(<App />, document.querySelector('root'));
+```
+## Demos
 
-### `npm run eject`
+Take a look at some [demos]((https://react-audio-visualizers.com/demos)) to see what the visualizers look like.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Documentation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Check out our [documentation website](https://react-audio-visualizers.com/docs).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the terms of the
+[MIT license](/LICENSE).
