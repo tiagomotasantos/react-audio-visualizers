@@ -47,7 +47,7 @@ ReactDOM.render(<App />, document.querySelector('root'));
 ```
 ## Demos
 
-Take a look at some [demos]((https://react-audio-visualizers.com/demos)) to see what the visualizers look like.
+Take a look at some [demos](https://react-audio-visualizers.com/demos) to see what the visualizers look like.
 
 ## Documentation
 
