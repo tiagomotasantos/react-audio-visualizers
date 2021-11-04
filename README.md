@@ -5,7 +5,7 @@
 A library of audio visualizer components for [React](https://facebook.github.io/react/) built with [ThreeJS](https://threejs.org/), through [react-three-fiber](https://github.com/pmndrs/react-three-fiber), and the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-[![npm latest package](https://img.shields.io/npm/v/react-audio-visualizers-core/latest.svg)](https://www.npmjs.com/package/react-audio-visualizers)
+[![npm latest package](https://img.shields.io/npm/v/react-audio-visualizers/latest.svg)](https://www.npmjs.com/package/react-audio-visualizers)
 
 </div>
 
