@@ -1,6 +1,6 @@
 {
   "name": "react-audio-visualizers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -8,6 +8,11 @@
     "dist",
     "package.json",
     "README.md"
+  ],
+  "keywords": [
+    "react",
+    "audio",
+    "visualizers"
   ],
   "dependencies": {
     "@react-three/fiber": "^7.0.1",
