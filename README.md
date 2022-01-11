@@ -47,11 +47,11 @@ ReactDOM.render(<App />, document.querySelector('root'));
 ```
 ## Demos
 
-Take a look at some [demos](https://react-audio-visualizers.com/demos) to see what the visualizers look like.
+Take a look at some [demos](https://demo-react-audio-visualizers.vercel.app/) to see what the visualizers look like.
 
 ## Documentation
 
-Check out the [documentation website](https://react-audio-visualizers.com/docs).
+Check out the [documentation website](https://docs-react-audio-visualizers.vercel.app/GettingStarted.html).
 
 ## License
 
